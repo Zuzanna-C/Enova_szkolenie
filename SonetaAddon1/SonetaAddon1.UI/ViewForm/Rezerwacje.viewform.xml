@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataForm Contexts="License.All" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns="http://www.enova.pl/schema/form.xsd"
+          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd">
+	<Flow Name="FilterPanel">
+		<Field CaptionHtml="Maszyna" EditValue="{RezerwacjeViewInfo+RezerwacjeParams.Maszyna}" />
+		<Field CaptionHtml="Klient" EditValue="{RezerwacjeViewInfo+RezerwacjeParams.Klient}" />
+		<Field CaptionHtml="Opłacone" EditValue="{RezerwacjeViewInfo+RezerwacjeParams.CzyOplacone}" />
+	</Flow>
+	<Grid Name="List" OrderBy="NrRezerwacji">
+		<Field EditValue="{NrRezerwacji}" CaptionHtml="Nr" Width="8"/>
+		<Field EditValue="{Klient}" Width="40"/>
+		<Field EditValue="{Maszyna}" Width="30" />
+		<Field EditValue="{Lot}" Width="30"/>
+		<Field EditValue="{CenaLotu}" CaptionHtml="Cena" Width="14"/>
+		<Field EditValue="{CzyOplacona}" CaptionHtml="Opłacona" />
+	</Grid>
+</DataForm>

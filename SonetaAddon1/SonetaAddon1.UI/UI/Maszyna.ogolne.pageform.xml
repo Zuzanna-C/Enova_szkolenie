@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<DataForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns="http://www.enova.pl/schema/form.xsd"
+          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd"
+          RightName="Page:OgolnePage"
+          Priority="100000"
+          DataType="SonetaAddon1.Maszyna, SonetaAddon1">
+  <Page Name="OgolnePage" CaptionHtml="Maszyna" DataContext="{DataSource}">
+    <Group>
+		<Field EditValue="{Producent}" />
+		<Field EditValue="{Model}" />
+		<Field EditValue="{NrBoczny}" />
+		<Field EditValue="{DataProd}" CaptionHtml="Data produkcji" />
+		<Field EditValue="{Uwagi}" />
+    </Group>
+  </Page>
+</DataForm>
+

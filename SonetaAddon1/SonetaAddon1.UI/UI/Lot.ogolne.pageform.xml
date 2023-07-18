@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<DataForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns="http://www.enova.pl/schema/form.xsd"
+          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd"
+          RightName="Page:KatalogLotowPage"
+          Priority="100000"
+          DataType="SonetaAddon1.Lot, SonetaAddon1">
+  <Page Name="KatalogLotowPage" CaptionHtml="Katalog lotów" DataContext="{DataSource}">
+    <Group>
+		<Row>
+			<Field EditValue="{KodUslugi}" Width="10" CaptionHtml="Kod" />
+			<Field EditValue="{Nazwa}" Width="*" LabelWidth="10"/>
+		</Row>
+	</Group>
+	<Group LabelWidth="8">
+		<Row>
+			<Field EditValue="{LokalizacjaICAO}" Width="10" CaptionHtml="ICAO" />
+			<Field EditValue="{LokalizacjaMiejscowosc}" Width="*" CaptionHtml="Miejscowość" LabelWidth="10"/>
+		</Row>
+		<Field EditValue="{Cena}" />
+		<Field EditValue="{Opis}" Width="*" Height="*"/>
+    </Group>
+  </Page>
+</DataForm>
+

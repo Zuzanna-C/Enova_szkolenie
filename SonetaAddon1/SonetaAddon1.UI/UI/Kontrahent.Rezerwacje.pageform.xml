@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<DataForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns="http://www.enova.pl/schema/form.xsd"
+          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd"
+          RightName="Page:RezerwacjePage"
+          Priority="100000"
+          DataType="SonetaAddon1.Kontrahent, SonetaAddon1">
+  <Page Name="RezerwacjePage" CaptionHtml="LotyWidokowe/Rezerwacje" DataContext="{new KontrahentExtender}" Visibility="{IsVisible}">
+	  <Group CaptionHtml="Rezerwacje lotów kontrahenta" Width="*" Height="*">
+		  <Grid Name="Loty" EditValue="{RezerwacjeLotow}" Width="*" Height="*"
+				EditButton="Auto" IsToolbarVisible="true">
+			  <Field EditValue="{NrRezerwacji}" Width="14"/>
+			  <Field EditValue="{Lot}" Width="*" />
+			  <Field EditValue="{CenaLotu}" Width="13"/>
+			  <Field EditValue="{CzyOplacona}" Width="12"/>
+		  </Grid>
+	  </Group>
+  </Page>
+</DataForm>
+

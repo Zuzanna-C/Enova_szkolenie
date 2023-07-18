@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Zawiera informację nagłówkową pliku XML oraz informację o użytym kodowaniu znaków. -->
+<module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.enova.pl/schema/business_struct.xsd" xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/business_struct.xsd"
+ name="Szkolenie" namespace="SonetaAddon1.Szkolenie" versionName="SonetaSzkolenie" versionNumber="1">
+  <!-- 
+  Główny element deklarujący nagłówek modułu. 
+  
+  xmlns - wszystkie elementy i atrybuty zostały zadeklarowane w xml-namespace http://www.enova.pl/schema/business_struct.xsd, dlatego konieczne jest użycie atrybutu xmlns, który określa ten właśnie namespace.
+  
+  name - każdy moduł musi posiadać nazwę, która znajduje się w wymaganym atrybucie name. Nazwa ta wykorzystywana jest między innymi do utworzenia odpowiednich nazw dla generowanych klas C#.
+  
+  versionName - kolejnym wymaganym atrybutem jest versionName. Określa nazwę numerów wersji (wersjonowania) pozwalających na automatyczne generowanie konwersji bazy danych z baz utworzonych starszymi wersjami bibliotek. Nazwane numery wersji pozwalają na niezależne prowadzenie projektów i wersjonowanie poszczególnych modułów. Standardowo nazwy wersji to system oraz enova użyte są przez program. Nazwa punktacja pozwala na wersjonowanie modułu niezależnie od wersji głównego programu.
+  
+  versionNumber - atrybut versionNumber określa numer wersji o danej nazwie. Liczba ta powinna być zwiększana zawsze, gdy dokonujemy zmian w module, który został opublikowany publicznie i konieczna będzie konwersja. Taka sama wartość atrybutu versionName może być przypisany wielu modułom. Ale wystarczy, że tylko jeden z nich będzie określał numer wersji atrybutem versionNumber. 
+  -->
+  <using>Soneta.CRM</using>
+
+  <import>../..</import>
+  <!-- 
+  Ten atrybut deklaruje folder, w którym będą poszukiwane pozostałe pliki business.xml.
+  Wczytywane są wszystkie pliki ze wskazanego foldera oraz folderów podrzędnych.
+  W tym przypadku uwzględnione zostaną wszystkie deklaracje business.xml w folderze nadrzędnym i jego podrzędnych.
+  -->
+
+	<table name ="Lot" tablename="Loty" tablecaption="Tabela z możliwymi lotami" guided ="Root">
+		<key name="WgKod" keyprimary="true" keyunique="true">
+			<keycol name="KodUslugi"/>
+		</key>
+		<col name="KodUslugi" required="true" type="string" length ="6"/>
+		<col name="Nazwa" required ="true" type ="string" length="80"/>
+		<!-- Tu używamy typu zdefiniowanego w Soneta.Types -->
+		<col name="Cena" required="false" type="currency"/>
+		<col name="LokalizacjaMiejscowosc" required="true" type="string" length="20"/>
+		<col name="LokalizacjaICAO" required="false" type="string" length="4"/>
+		<col name="Opis" required="false" type="string" length="200"/>
+	</table>
+
+	<table name="Maszyna" tablename="Maszyny" tablecaption="Tabela maszyn którymi można odbyć lot" guided="Root" >
+		<key name="WgNrBoczny" keyprimary="true" keyunique="true">
+			<keycol name="NrBoczny"/>
+		</key>
+		<col name="NrBoczny" required="true" type="string" length="6">
+			<verifier name="Maszyna.NrBocznyPoprawny"/>
+			<!-- deklaracja weryfikatora dla pola -->
+		</col>
+		<col name="Producent" type="string" length="20"/>
+		<col name="Model" required="true" type="string" length="20"/>
+		<col name="DataProd" required="true" type="date"/>
+		<col name="Uwagi" required="false" type="string" length="200"/>
+	</table>
+
+	<enum name="CzyOplacone"/>
+
+	<table name="Rezerwacja" tablename="Rezerwacje" tablecaption="Tabela rezerwacji lotów dla klientów" guided="Root">
+		<key name="WgNrRezerwacji" keyprimary="true" keyunique="true">
+			<keycol name="NrRezerwacji"/>
+		</key>
+		<key name="WgDaty" keyprimary="false" keyunique="false">
+			<keycol name="Data" />
+		</key>
+		<col name="NrRezerwacji" required="true" type="string" length="6"/>
+		<col name="Data" required="true" type="date" />
+		<!-- Poniżej użycie typu wiersza z innej tabeli dodatku -->
+		<col name="Lot" type="Lot"
+			 required="true" caption="Lot widokowy"
+			 relname="Rezerwacja_Lot" children ="Rezerwacje"
+			 delete="cascade"/>
+		<col name="Maszyna" type="Maszyna" required="true"
+			 caption="Maszyna" relname="Rezerwacja_Maszyna"
+			 children="Rezerwacje" delete="cascade"/>
+
+		<!-- Poniżej użycie typu wiersza z innej tabeli programu enova365 (z modułu Soneta.CRM) -->
+		<col name="Klient" type="Kontrahent" required="true"
+			  caption="Klient" relname="Rezerwacja_Klient"
+			 children="Rezerwacje" delete="cascade"/>
+		<col name="CenaLotu" type="currency" required="true" description="Cena za lot dla klienta" />
+
+		<!-- Poniżej użycie typu wcześniej zadeklarowanego w business.xml (enum) -->
+		<col name="CzyOplacona" type="CzyOplacone" required="false"/>
+	</table>
+	
+  <!-- 
+  Określa namespaces Microsoft.NET Framework, których identyfikatory są używane przez ten moduł. W tym przypadku pole Dokument odnosi się do obiektu modułu handel DokumentHandlowy. Możliwe jest użycie wielu elementów using.
+  -->
+</module>
